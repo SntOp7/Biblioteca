@@ -17,6 +17,11 @@ public class Biblioteca {
     private double ganancia;
     private int cantidadLibros;
 
+    /**
+     * Metodo Constructor de la clase biblioteca
+     * 
+     * @param nombre
+     */
     public Biblioteca(String nombre) {
         this.nombre = "Virgilio Barco";
         this.ganancia = 0;
@@ -27,6 +32,10 @@ public class Biblioteca {
 
     }
 
+
+    /**
+     * Metodo principal que regula todo el flujo del programa.
+     */
     public void menu() {
         imprimir("------ BIBLIOTECA VIRGILIO BARCO ------");
 
@@ -64,7 +73,10 @@ public class Biblioteca {
         }
 
     }
-
+/**
+ * Metodo auxiliar que controla la recursividad de los métodos principales
+ * @param num
+ */
     public void submenu(int num) {
         switch (num) {
             case 1:
@@ -86,43 +98,11 @@ public class Biblioteca {
         }
     }
 
-    public void autocarga() {
-        Estudiante alu1 = new Estudiante("JUAN", "1010", "321", "juan@uqvirtual", 18);
-        Estudiante alu2 = new Estudiante("ANA", "1011", "321", "ana@uqvirtual", 20);
-        Estudiante alu3 = new Estudiante("Sofia", "1012", "321", "sofia@uqvirtual", 45);
-        ingresarEstudiante(alu1);
-        ingresarEstudiante(alu2);
-        ingresarEstudiante(alu3);
+    
 
-        Bibliotecario biblio1 = new Bibliotecario("Maria", "1012", "321",
-                "maria@uqvirtual", 0, 4);
-        Bibliotecario biblio2 = new Bibliotecario("Pedro", "1013", "321",
-                "jose@uqvirtual", 0, 5);
-        ingresarBibliotecario(biblio2);
-        ingresarBibliotecario(biblio1);
-
-        Libro lib1 = new Libro("23", "Marco", "Meditaciones", "Mestas", LocalDate.of(2020, 12, 03),
-                5);
-        Libro lib2 = new Libro("24", "Kant", "Critica de la Razon", "Mestas",
-                LocalDate.of(1980, 8, 15), 19);
-        Libro lib3 = new Libro("25", "Camus", "Sisifo", "alianza",
-                LocalDate.of(1995, 8, 15), 5);
-        ingresarLibro(lib1);
-        ingresarLibro(lib2);
-        ingresarLibro(lib3);
-
-        Prestamo prestamo = new Prestamo("1034", alu1, biblio1, 1000, LocalDate.now(), LocalDate.of(2024, 9, 30));
-        prestamo.crearDetallePrestamo(lib1, 3, 1000);
-        Prestamo prestamo1 = new Prestamo("1035", alu1, biblio1, 5000, LocalDate.now(), LocalDate.of(2024, 10, 30));
-        prestamo1.crearDetallePrestamo(lib1, 3, 1000);
-        Prestamo prestamo2 = new Prestamo("1036", alu2, biblio2, 3000, LocalDate.now(), LocalDate.of(2024, 11, 30));
-        prestamo2.crearDetallePrestamo(lib1, 3, 1000);
-        ingresarPrestamo(prestamo);
-        ingresarPrestamo(prestamo1);
-        ingresarPrestamo(prestamo2);
-
-    }
-
+    /**
+     * Metodo que regula todas las acciones referentes a la información de la biblioteca
+     */
     public void operacionConsultaBiblioteca() {
         imprimir("------Consulta Biblioteca------");
         imprimir("1.Consultar numero de libros en el inventario.");
@@ -150,6 +130,9 @@ public class Biblioteca {
 
     }
 
+    /**
+     * Metodo que muestra en la consola el total de títulos y copias que hay en la biblioteca 
+    */
     public void librosBiblioteca() {
         int numLibros = libros.size();
         int copiasBiblioteca = copiasBiblioteca();
@@ -158,6 +141,10 @@ public class Biblioteca {
         submenu(5);
     }
 
+    /**
+     * Metodo que cuenta el total de copias disponibles que hay en la biblioteca.
+     * @return El numero de copias de libros que hay en la biblioteca.
+     */
     public int copiasBiblioteca() {
         int copiasBiblioteca = 0;
         for (Libro libro : libros) {
@@ -167,6 +154,9 @@ public class Biblioteca {
         return copiasBiblioteca;
     }
 
+    /**
+     * Metodo que imprime en la consola el total de las ganancias de la biblioteca.
+     */
     public void calcularTotalGanancias() {
         imprimir("------Ganancias------");
         double ingresos = 0;
@@ -178,6 +168,9 @@ public class Biblioteca {
         submenu(5);
     }
 
+    /**
+     * Metodo que imprime en la consola el total de la nomina de la biblioteca.
+     */
     public void calcularTotalPagos() {
         imprimir("------Calcular Nomina------");
         double nomina = 0;
@@ -190,6 +183,9 @@ public class Biblioteca {
 
     // Metodos Estudiante
 
+    /**
+     * Metodo que gestiona todas las  operaciones referentes a los estudiantes.
+     */
     public void operacionEstudiante() {
         imprimir("------Operacion Estudiante------");
         imprimir("1. Crear Estudiante.");
@@ -222,10 +218,10 @@ public class Biblioteca {
         }
     }
 
-    public void imprimir(String texto) {
-        System.out.println(texto);
-    }
-
+    
+    /**
+     * Metodo que invoca al metodo constructor de la clase estudiante, para crear estudiantes con datos ingresados por la consola.
+     */
     public void crearEstudiante() {
         imprimir("------Creacion de Estudiantes------");
         String nombre = ingresarCadena("Nombre: ");
@@ -245,11 +241,20 @@ public class Biblioteca {
         }
     }
 
+    /**
+     * Metodo que agrega un estudiante a la lista de estudiantes de la biblioteca.
+     * @param estudiante
+     */
     public void ingresarEstudiante(Estudiante estudiante) {
         estudiantes.add(estudiante);
 
     }
 
+    /**
+     * Metodo que verifica con su cedula la existencia de un estudiante en la lista de estudiantes de biblioteca.
+     * @param cedula
+     * @return Falso si el estudiante no esta en la lista, verdadero si lo esta.
+     */
     public boolean verificarEstudiante(String cedula) {
         boolean centinela = false;
         for (Estudiante estudiante : estudiantes) {
@@ -260,6 +265,9 @@ public class Biblioteca {
         return centinela;
     }
 
+    /**
+     * Metodo que elimina un estudiante de la lista de estudiantes de biblioteca.
+     */
     public void eliminarEstudiante() {
         imprimir("-------Eliminacion de Estudiantes------");
         String cedula = ingresarCadena("Ingrese el cedula: ");
@@ -274,6 +282,9 @@ public class Biblioteca {
         submenu(1);
     }
 
+    /**
+     * Metodo que imprime los datos de un estudiante en la consola.
+     */
     public void mostrarEstudiante() {
         String cedula = ingresarCadena("Ingrese la cedula: ");
         for (Estudiante estudiante : estudiantes) {
@@ -287,6 +298,10 @@ public class Biblioteca {
         submenu(1);
     }
 
+        /**
+         * Metodo que recupera un estudiante de la lista de estudiantes de biblioteca.
+         * @return El estudiante en caso de que exista, null en caso contrario.
+         */
     public Estudiante buscarEstudiante() {
         String cedula = ingresarCadena("Ingrese la cedula del estudiante a buscar: ");
         Estudiante student = null;
@@ -302,6 +317,9 @@ public class Biblioteca {
         return student;
     }
 
+    /**
+     * Metodo que imprime en la consola los datos de el/los estudiante/s con mas prestamos.
+     */
     public void estudianteMasPrestamos() {
         imprimir("------Consulta Estudiante con mas Prestamos------");
         int max = 0;
@@ -333,6 +351,10 @@ public class Biblioteca {
 
     // Metodos Bibliotecario
 
+
+    /**
+     * Metodo que gestiona todas las operacion referentes a los bibliotecarios.
+     */
     public void operacionBibliotecario() {
         imprimir("-------OPeracion Bibliotecario------");
         imprimir("1. Crear Bibliotecario");
@@ -364,6 +386,9 @@ public class Biblioteca {
         }
     }
 
+    /**
+     * Metodo que invoca al metodo constructor de la clase bibliotecario, para crear un nuevo bibliotecario con datos ingresados por la consola.
+     */
     public void crearBibliotecario() {
         imprimir("------Creacion Bibliotecarios------");
         String nombre = ingresarCadena("Nombre: ");
@@ -384,12 +409,21 @@ public class Biblioteca {
         }
     }
 
+    /**
+     * Metodo que agrega un bibliotecario a la lista de bibliotecarios de la biblioteca.
+     * @param bibliotecario
+     */
     public void ingresarBibliotecario(Bibliotecario bibliotecario) {
         bibliotecarios.add(bibliotecario);
     }
 
+
+    /**
+     * Metodo que recupera un bibliotecario de la lista de bibliotecarios de la biblioteca.
+     * @return
+     */
     public Bibliotecario buscarBibliotecario() {
-        String cedula = ingresarCadena("Ingrese la cedula del bibliotecario a seleccionar: ");
+        String cedula = ingresarCadena("Ingrese la cedula del bibliotecario a recuperar: ");
         Bibliotecario librarian = null;
         if (verificarBibliotecario(cedula)) {
             for (Bibliotecario bibliotecario : bibliotecarios) {
@@ -403,6 +437,11 @@ public class Biblioteca {
         return librarian;
     }
 
+    /**
+     * Metodo que verifica con su cedula la existencia de un bibliotecario en la lista de bibliotecarios de biblioteca. 
+     * @param cedula
+     * @return True en caso de que exista el bibliotecario, false en caso contrario.
+     */
     public boolean verificarBibliotecario(String cedula) {
         boolean centinela = false;
         for (Bibliotecario bibliotecario : bibliotecarios) {
@@ -413,6 +452,9 @@ public class Biblioteca {
         return centinela;
     }
 
+    /**
+     * Metodo que elimina con su cedula a un bibliotecario de la lista de bibliotecarios de biblioteca.
+     */
     public void eliminarBibliotecario() {
         imprimir("------Eliminar Bibliotecario------");
         String cedula = ingresarCadena("Ingrese la cedula: ");
@@ -430,6 +472,9 @@ public class Biblioteca {
         submenu(2);
     }
 
+    /**
+     * Metodo que imprime en la consola el numero de prestamos realizados por un bibliotecario.
+     */
     public void prestamosBibliotecario() {
         imprimir("------Consulta Numero Prestamos Bibliotecario------");
         mostrarBibliotecarios();
@@ -443,6 +488,9 @@ public class Biblioteca {
         submenu(2);
     }
 
+    /**
+     * Metodo que imprime en la consola, los datos de un bibliotecario con base en su cedula.
+     */
     public void mostrarBibliotecario() {
         String cedula = ingresarCadena("Ingrese la cedula: ");
         for (Bibliotecario bibliotecario : bibliotecarios) {
@@ -456,12 +504,19 @@ public class Biblioteca {
         submenu(2);
     }
 
+    /**
+     * Metodo que imprime en la consola los datos de un bibliotecario, sin incluir su suelda y antigüedad. 
+     */
     public void mostrarBibliotecarios() {
         for (Bibliotecario bibliotecario : bibliotecarios) {
             imprimir(bibliotecario.toStringBasico() + "\n");
         }
     }
 
+
+    /**
+     * Metodo que gestiona todas las operaciones referentes a libros.
+     */
     public void operacionLibro() {
         imprimir("------Operacion Libro------");
         imprimir("1. Crear Libro ");
@@ -502,6 +557,9 @@ public class Biblioteca {
         }
     }
 
+    /**
+     * Metodo que invoca al metodo constructor de la clase libro, para crear un libro nuevo con datos ingresados por la consola.
+     */
     public void crearLibro() {
         imprimir("------Creacion de Libros------");
         String codigo = ingresarCadena("Codigo: ");
@@ -523,10 +581,19 @@ public class Biblioteca {
         submenu(3);
     }
 
+    /**
+     * Metodo que agrega un libro a lista de libros de biblioteca.
+     * @param libro
+     */
     public void ingresarLibro(Libro libro) {
         libros.add(libro);
     }
 
+    /**
+     * Metodo que verifica la existencia de un libro en la lista de libros de biblioteca.
+     * @param codigo
+     * @return True en caso de que el libro exista, false en caso contrario.
+     */
     public boolean verificarLibro(String codigo) {
         boolean centinela = false;
         for (Libro libro : libros) {
@@ -537,6 +604,11 @@ public class Biblioteca {
         return centinela;
     }
 
+    /**
+     * Metodo que recupera con base en su titulo, un libro de la lista de libros de biblioteca.
+     * @param nombre
+     * @return El libro en caso de que exista, null, en caso contrario.
+     */
     public Libro verificarLibroTitulo(String nombre) {
         Libro book = null;
         for (Libro libro : libros) {
@@ -548,6 +620,9 @@ public class Biblioteca {
         return book;
     }
 
+    /**
+     * Metodo que permite reemplazar o sobreescribir los datos de un libro.
+     */
     public void reemplazoLibro() {
         imprimir("------Reemplazo de libro------");
         Libro libro = seleccionarLibro();
@@ -573,6 +648,11 @@ public class Biblioteca {
         submenu(3);
     }
 
+
+    /**
+     * Metodo que recupera con base en su codigo un libro de la lista de libros de biblioteca.
+     * @return El libro en caso de que existe, null en caso contrario.
+     */
     public Libro seleccionarLibro() {
         String codigo = ingresarCadena("Ingrese el codigo del libro a seleccionar");
         Libro book = null;
@@ -588,6 +668,9 @@ public class Biblioteca {
         return book;
     }
 
+    /**
+     * Metodo que permite modificar el numero de copias de un libro.
+     */
     public void actualizacionCopias() {
         imprimir("------Actualización de Copias------");
         String codigo = ingresarCadena("Codigo: ");
@@ -607,6 +690,9 @@ public class Biblioteca {
         submenu(3);
     }
 
+    /**
+     * Metodo que permite eliminar con base en su codigo un libro de la lista de libros de biblioteca.
+     */
     public void eliminarLibro() {
         imprimir("------------------------");
         String codigo = ingresarCadena("Ingrese el codigo: ");
@@ -621,6 +707,9 @@ public class Biblioteca {
         submenu(3);
     }
 
+    /**
+     * Metodo que permite imprimir en la consola los datos de un libro, con base en su codigo.
+     */
     public void mostrarLibro() {
         imprimir("------Mostrar Libro------");
         String codigo = ingresarCadena("Ingrese el codigo: ");
@@ -635,12 +724,18 @@ public class Biblioteca {
         submenu(3);
     }
 
+    /**
+     * Metodo que imprimir en la consola los libros que en la lista de libros de biblioteca.
+     */
     public void mostrarLibros() {
         for (Libro libro : libros) {
             imprimir(libro.toString());
         }
     }
 
+    /**
+     * Metodo que imprime en la consola el numero de prestamos en los que un libro esta involucrado.
+     */
     public void numeroPrestamosLibro() {
         imprimir("------Consulta Numero de Prestamo por Libro------");
         String titulo = ingresarCadena("Ingrese el nombre del libro a consultar:");
@@ -667,6 +762,9 @@ public class Biblioteca {
 
     // Metodos para prestamo
 
+    /**
+     * Metodo que gestiona todas las operaciones referentes a los prestamos.
+     */
     public void operacionPrestamo() {
         imprimir("-------Operacion Prestamo------");
         imprimir("1. Crear Prestamo");
@@ -699,6 +797,9 @@ public class Biblioteca {
         }
     }
 
+    /**
+     * Metodo que invoca el metodo constructor de la clase prestamo, para crear un nuevo prestamo con datos ingresados por la consola.
+     */
     public void crearPrestamo() {
         imprimir("-------Creacion Prestamos------");
         String codigo = ingresarCadena("Codigo: ");
@@ -715,7 +816,8 @@ public class Biblioteca {
             do {
                 fechaEntrega = ingresarFecha("Fecha entrega del prestamo: ");
                 if (ChronoUnit.DAYS.between(fecha, fechaEntrega) < 0) {
-                    imprimir("La fecha de entrega no puede ser anterior a la fecha de prestamo. Por favor, ingrese una fecha válida.");
+                    imprimir(
+                            "La fecha de entrega no puede ser anterior a la fecha de prestamo. Por favor, ingrese una fecha válida.");
                 }
             } while (ChronoUnit.DAYS.between(fecha, fechaEntrega) < 0);
 
@@ -746,6 +848,12 @@ public class Biblioteca {
         }
     }
 
+    /**
+     * Metodo que permite agregar libros a un prestamo
+     * @param prestamo
+     * @param costoDia
+     * @return True en caso de que se haya agregado al menos un libro en el prestamo, false en caso contrario.
+     */
     public boolean operacionLibroPrestamo(Prestamo prestamo, double costoDia) {
 
         boolean agregado = false;
@@ -790,6 +898,9 @@ public class Biblioteca {
 
     }
 
+    /**
+     * Metodo que permite entregar un prestamo y muestra el valor total de esta ultimo.
+     */
     public void entregarPrestamo() {
         imprimir("------Entrega Prestamos------");
         Estudiante alumno = buscarEstudiante();
@@ -798,7 +909,7 @@ public class Biblioteca {
             imprimir("\n---Prestamos activos del estudiante---\n");
             if (alumno.verificarPrestamos()) {
                 alumno.mostrarPrestamosEstudiante();
-                String codigo =ingresarCadena("Ingrese el codigo del prestamo a entregar");
+                String codigo = ingresarCadena("Ingrese el codigo del prestamo a entregar");
                 Prestamo prestamo = alumno.seleccionarPrestamoEstudiante(codigo);
                 if (prestamo != null) {
                     imprimir("\n------Prestamo seleccionado:------\n");
@@ -832,6 +943,9 @@ public class Biblioteca {
         submenu(4);
     }
 
+    /**
+     * Metodo que imprime en la consola los datos de un prestamo sin incluir su total.
+     */
     public void mostrarPrestamo() {
         imprimir("------Consulta Prestamos------");
         Prestamo prestamo = seleccionarPrestamo("Ingrese el codigo del prestamo a consultar: ");
@@ -841,6 +955,11 @@ public class Biblioteca {
         submenu(4);
     }
 
+    /**
+     * Metodo que permite recuperar un prestamo de la lista de prestamos de la biblioteca.
+     * @param mensaje
+     * @return El prestamo en caso de que existe, null en caso contrario.
+     */
     public Prestamo seleccionarPrestamo(String mensaje) {
         String codigo = ingresarCadena(mensaje);
         Prestamo loan = null;
@@ -859,21 +978,31 @@ public class Biblioteca {
         return loan;
     }
 
-    
-
+    /**
+     * Metodo que permite eliminar un prestamo de la lista de prestamos de biblioteca.
+     */
     public void eliminarPrestamo() {
         Prestamo prestamo = seleccionarPrestamo("Ingrese el codigo del prestamo a eliminar: ");
         if (prestamo != null) {
             prestamos.remove(prestamo);
             imprimir("Prestamo eliminado...");
         }
-    submenu(4);
+        submenu(4);
     }
 
+    /**
+     * Metodo que permite agregar un prestamo a lista de prestamos de biblioteca.
+     * @param prestamo
+     */
     public void ingresarPrestamo(Prestamo prestamo) {
         prestamos.add(prestamo);
     }
 
+    /**
+     * Metodo que permite verificar la existencia de un prestamo en la lista de prestamos de biblioteca.
+     * @param codigo
+     * @return True en caso de que el prestamo exista, false en caso contrario.
+     */
     public boolean verificarPrestamo(String codigo) {
         boolean centinela = false;
         for (Prestamo prestamo : prestamos) {
@@ -884,8 +1013,12 @@ public class Biblioteca {
         return centinela;
     }
 
+    /**
+     * Metodo que permite ingresar un cadena de datos por la consola.
+     * @param texto
+     * @return La cadena ingresada,
+     */
     public static String ingresarCadena(String texto) {
-        @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         System.out.println(texto);
         String cadena = scanner.nextLine();
@@ -899,7 +1032,6 @@ public class Biblioteca {
      * @return num
      */
     public static int ingresarEntero(String texto) {
-        @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         int num = 0;
         boolean repetir = true;
@@ -915,8 +1047,12 @@ public class Biblioteca {
         return num;
     }
 
+    /**
+     * Metodo que permite ingrese un numero real, evitando cualquier dato invalido.
+     * @param texto
+     * @return El numero ingresado
+     */
     public static double ingresarReal(String texto) {
-        @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         double num = 0;
         boolean repetir = true;
@@ -932,8 +1068,12 @@ public class Biblioteca {
         return num;
     }
 
+    /**
+     * Metodo que permite ingresar un fecha con el formato yyyy-MM-dd, evitando cualquier dato invalido
+     * @param texto
+     * @return La fecha ingresada.
+     */
     public LocalDate ingresarFecha(String texto) {
-        @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fecha = null;
@@ -952,58 +1092,122 @@ public class Biblioteca {
         return fecha;
     }
 
+    /**
+     * Metodo que permite imprimir en la consola un cadena.
+     * @param texto
+     */
+    public void imprimir(String texto) {
+        System.out.println(texto);
+    }
+
+    /**
+     *  Metodo que permite recuperar el nombre de la biblioteca.
+     * @return El nombre de la biblioteca,}.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Metodo que permite modificar el nombre de la biblioteca.
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * Metodo que permite recuperar la lista de estudiantes de la biblioteca.
+     * @return La lista de estudiantes de la biblioteca.
+     */
     public LinkedList<Estudiante> getEstudiantes() {
         return estudiantes;
     }
 
+    /**
+     * Metodo que permite modificar la lista de estudiantes de la biblioteca.
+     * @param estudiantes
+     */
     public void setEstudiantes(LinkedList<Estudiante> estudiantes) {
         this.estudiantes = estudiantes;
     }
 
+ /**
+  * Metodo que permite recuperar la lista de bibliotecarios de la biblioteca.
+  * @return La lista de bibliotecarios de biblioteca.
+  */
     public LinkedList<Bibliotecario> getBibliotecarios() {
         return bibliotecarios;
     }
 
+    /**
+     * Metodo que permite modificar la lista de bibliotecarios de biblioteca.
+     * @param bibliotecarios
+     */
     public void setBibliotecarios(LinkedList<Bibliotecario> bibliotecarios) {
         this.bibliotecarios = bibliotecarios;
     }
 
+    /**
+     * Metodo qu permite recuperar la lista de prestamos de biblioteca.
+     * @return La lista de prestamos de biblioteca
+     */
     public LinkedList<Prestamo> getPrestamos() {
         return prestamos;
     }
 
+    /**
+     * Metodo que permite modificar la lista de prestamos de biblioteca.
+     * @param prestamos
+     */
     public void setPrestamos(LinkedList<Prestamo> prestamos) {
         this.prestamos = prestamos;
     }
 
+    /**
+     * Metodo que permite recuperar la lista del libros de biblioteca.
+     * @return La lista de libros de biblioteca
+     */
     public LinkedList<Libro> getLibros() {
         return libros;
     }
 
+    /**
+     * Metodo que permite modificar la lista de libros de biblioteca.
+     * @param libros
+     */
     public void setLibros(LinkedList<Libro> libros) {
         this.libros = libros;
     }
 
+    /**
+     * Metodo que permite recuperar las ganacias de la biblioteca.
+     * @return Las ganancias de la biblioteca.
+     */
     public double getGanancia() {
         return ganancia;
     }
 
+    /**
+     * Metodo que permite modificar las ganancias de la biblioteca.
+     * @param ganancia
+     */
     public void setGanancia(double ganancia) {
         this.ganancia = ganancia;
     }
 
+    /**
+     * Metodo que permite recuperar la cantidad de libros de la biblioteca.
+     * @return La cantidad de libros de la biblioteca
+     */
     public int getCantidadLibros() {
         return cantidadLibros;
     }
 
+    /**
+     * Metodo que permite modificar la cantidad libros de biblioteca.
+     * @param cantidadLibros
+     */
     public void setCantidadLibros(int cantidadLibros) {
         this.cantidadLibros = cantidadLibros;
     }
